@@ -27,16 +27,11 @@ class WeatherScreenViewModel @Inject constructor(
     private val getForecastUseCase: GetForecastUseCase
 ): ViewModel(){
 
-    var currentWeather by mutableStateOf<Resource<WeatherResponse>>(Resource.Idle())
+    var currentWeather by mutableStateOf<Resource<WeatherResponse>>(Resource.Loading())
             private set
 
-    var fiveDaysForecast by mutableStateOf<Resource<List<Item>>>(Resource.Idle())
+    var fiveDaysForecast by mutableStateOf<Resource<List<Item>>>(Resource.Loading())
             private set
-
-    init {
-        getCurrentWeather()
-        getFiveDaysForecast()
-    }
 
     fun getCurrentWeather(
         lat: Double = 27.558750,

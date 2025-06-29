@@ -21,7 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import com.example.weathercompose.utils.Time
+import com.example.weathercompose.utils.TimeUtils
 import com.example.weathercompose.utils.Contstants.getGustColor
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -129,7 +129,7 @@ private fun Forecast(
     modifier: Modifier = Modifier,
     item: Item
 ){
-    var isSelected = Time.isToday(item.dt)
+    var isSelected = TimeUtils.isToday(item.dt)
 
     val updateModifier = remember(isSelected) {
         if(isSelected){
@@ -195,12 +195,12 @@ private fun Forecast(
         }
 
         Text(
-            text = Time.getDayNameFromTimestamp(item.dt),
+            text = TimeUtils.getDayNameFromTimestamp(item.dt),
             style = MaterialTheme.typography.labelLarge,
             color = primaryTextColor
         )
         Text(
-            text = Time.getDateFromTimestamp(item.dt),
+            text = TimeUtils.getDateFromTimestamp(item.dt),
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Normal,
             color = secondaryTextColor

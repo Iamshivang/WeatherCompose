@@ -2,7 +2,7 @@ package com.example.weathercompose.presentation.components
 
 
 import com.example.weathercompose.utils.Contstants.getImageUrl
-import com.example.weathercompose.utils.Time.getFormattedCurrentDate
+import com.example.weathercompose.utils.TimeUtils.getFormattedCurrentDate
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

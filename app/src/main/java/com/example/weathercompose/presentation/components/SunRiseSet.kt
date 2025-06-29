@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.weathercompose.presentation.theme.ColorSurface
 import com.example.weathercompose.R
 import com.example.weathercompose.presentation.theme.ColorTextPrimary
-import com.example.weathercompose.utils.Time
+import com.example.weathercompose.utils.TimeUtils
 
 /*
  * Author: Shivang Yadav
@@ -112,7 +112,7 @@ private fun Content(
             )
 
             Text(
-                text = Time.convertUnixToTime(sunRise),
+                text = TimeUtils.convertUnixToTime(sunRise),
                 style = MaterialTheme.typography.bodyLarge,
                 color = ColorTextPrimary
             )
@@ -130,7 +130,7 @@ private fun Content(
             )
 
             Text(
-                text = Time.convertUnixToTime(sunSet),
+                text = TimeUtils.convertUnixToTime(sunSet),
                 style = MaterialTheme.typography.bodyLarge,
                 color = ColorTextPrimary
             )

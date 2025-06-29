@@ -10,7 +10,7 @@ import java.util.TimeZone
  * Created: 6/10/25
  * Description: [Add description here]
  */
-object Time {
+object TimeUtils {
 
     fun convertUnixToTime(timestamp: Long): String {
         val date = Date(timestamp * 1000) // Convert seconds to milliseconds
