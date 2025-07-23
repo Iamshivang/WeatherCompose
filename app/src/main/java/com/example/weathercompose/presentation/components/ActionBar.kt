@@ -192,7 +192,7 @@ private fun LocationInfo(
                 text = location,
                 color = ColorTextPrimary,
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleMedium
             )
         }
     }

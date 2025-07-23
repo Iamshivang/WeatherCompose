@@ -1,13 +1,13 @@
 package com.example.weathercompose
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -44,7 +44,6 @@ class MainActivity : ComponentActivity(), LocationListener {
     private val locationPermissionCode = 2
     private var latitude by mutableStateOf<Double?>(null)
     private var longitude by mutableStateOf<Double?>(null)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,15 +90,31 @@ class MainActivity : ComponentActivity(), LocationListener {
                 locationPermissionCode
             )
         } else {
-            getLocation()
+
+            if(isLocationEnabled()){
+                getLocation()
+            }else{
+                // Go to location settings if GPS is OFF
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
         }
     }
 
-    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION])
     private fun getLocation(){
 
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+        // Try to get last known location immediately (faster)
+        val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        if (lastKnownLocation != null) {
+            latitude = lastKnownLocation.latitude
+            longitude = lastKnownLocation.longitude
+            Log.d(TAG, "Using last known location: $latitude, $longitude")
+        } else {
+            // Fall back to waiting for live location updates
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0f, this)
+            Log.d(TAG, "Waiting for live GPS update...")
+        }
     }
 
     override fun onLocationChanged(location: Location) {
@@ -120,11 +135,34 @@ class MainActivity : ComponentActivity(), LocationListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId)
         if(requestCode == locationPermissionCode){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                getLocation()
+
+                if(isLocationEnabled()){
+                    getLocation()
+                }else{
+                    // Go to location settings if GPS is OFF
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+
             }else{
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                // Permission denied — go to app permission settings
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", packageName, null)
+                intent.data = uri
                 startActivity(intent)
             }
         }
     }
+
+    private fun isLocationEnabled(): Boolean {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkAndRequestPermission()
+    }
+
 }
