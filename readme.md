@@ -2,9 +2,6 @@
 
 A stunning Kotlin Android app built with **Jetpack Compose**, showcasing real-time weather updates using the **OpenWeatherMap API**. With a smooth and clean UI, it dynamically fetches weather data based on your **current location**, offering detailed metrics and a 5-day forecast.
 
-![Screenshot 1]("https://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose1.jpg")
-![Screenshot 2]("http://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose2.jpg")
-
 ---
 
 ## 🚀 Features
