@@ -86,7 +86,7 @@ A stunning Kotlin Android app built with **Jetpack Compose**, showcasing real-ti
 
 | Home Screen | 5-Day Forecast  |
 | ----------- | --------------- |
-| ![Home]("https://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose1.jpg") | ![Forecast]("http://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose2.jpg") |
+| <img src="https://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose1.jpg?raw=true" width="200"/> | <img src="https://github.com/Iamshivang/WeatherCompose/blob/main/app/assests/weathercompose2.jpg?raw=true" width="200"/> |
 
 ---
 
