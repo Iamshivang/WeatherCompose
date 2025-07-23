@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.weathercompose.R
 import com.example.weathercompose.domain.model.AdditionalItem
 
+
 /*
  * Author: Shivang Yadav
  * Created: 6/26/25
@@ -11,7 +12,7 @@ import com.example.weathercompose.domain.model.AdditionalItem
  */
 object Contstants {
 
-    const val API_KEY = "aa0abba60e9d2943e55403d1eb4b9d7a"
+    const val API_KEY = ""
     const val BASE_URL = "https://api.openweathermap.org/"
     const val UNIT = "metric"
 
